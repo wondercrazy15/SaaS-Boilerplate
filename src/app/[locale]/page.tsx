@@ -1,10 +1,9 @@
-import Homepage from '@/views/homepage'
-import React from 'react'
+import React from 'react';
+
+import Homepage from '@/views/homepage';
 
 function page() {
-  return (
-    <Homepage />
-  )
+  return <Homepage />;
 }
 
-export default page
+export default page;

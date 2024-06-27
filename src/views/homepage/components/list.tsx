@@ -1,32 +1,35 @@
-import React, { Fragment } from 'react'
-import fetchList from '../utils/fetchList'
-import Card from './card'
-import type { ListObj } from '../types'
-import Tag from './tag'
+import React from 'react';
+
+import type { ListObj } from '../types';
+import fetchList from '../utils/fetchList';
+import Card from './card';
+import Tag from './tag';
 
 async function List() {
-  const { list } = await fetchList() || []
+  const { list } = (await fetchList()) || [];
 
   return (
-    <Fragment>
-      <div className='flex justify-start gap-3 my-4 flex-wrap'>
-        {
-          (list && Array.isArray(list)) &&
-          (list).map((item: ListObj, index: number) => (
-            <Tag key={`${index}_tag-${item.id}`} title={item.channel} className='py-2 px-5' />
-          ))
-        }
+    <>
+      <div className="my-4 flex flex-wrap justify-start gap-3">
+        {list &&
+          Array.isArray(list) &&
+          list.map((item: ListObj) => (
+            <Tag
+              key={`_tag-${item.id}`}
+              title={item.channel}
+              className="px-5 py-2"
+            />
+          ))}
       </div>
-      <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-        {
-          (list && Array.isArray(list)) &&
-          (list).map((item: ListObj, index: number) => (
-            <Card data={item} key={`${index}_list-card-${item.id}`} />
-          ))
-        }
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+        {list &&
+          Array.isArray(list) &&
+          list.map((item: ListObj) => (
+            <Card data={item} key={`_list-card-${item.id}`} />
+          ))}
       </div>
-    </Fragment>
-  )
+    </>
+  );
 }
 
-export default List
+export default List;
